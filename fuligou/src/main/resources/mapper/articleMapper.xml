@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tech.dao.articleMapper" >
+  <resultMap id="BaseResultMap" type="tech.model.article" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="push_time" property="pushTime" jdbcType="TIMESTAMP" />
+    <result column="label_id" property="labelId" jdbcType="VARCHAR" />
+    <result column="comment_num" property="commentNum" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="like_num" property="likeNum" jdbcType="VARCHAR" />
+    <result column="pay_id" property="payId" jdbcType="VARCHAR" />
+    <result column="cover_pic" property="coverPic" jdbcType="VARCHAR" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    `id`, `title`, `push_time`, `label_id`, `comment_num`, `content`, `like_num`, `pay_id`,`cover_pic`,`intro`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from `article`
+    where `id` = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="queryById" resultMap="BaseResultMap" parameterType="tech.model.article" >
+    select
+    <include refid="Base_Column_List" />
+    from `article`
+    where `id` = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="query" resultMap="BaseResultMap" parameterType="tech.model.article" >
+    select
+    `id`, `title`, `push_time`, `label_id`, `comment_num`, `like_num`, `pay_id`,`cover_pic`,`intro`
+    from `article`
+   <where>
+     <if test="id != null" >
+     and id = #{id,jdbcType=INTEGER}
+     </if>
+     <if test="title != null" >
+     and title like concat('%', #{title,jdbcType=VARCHAR},'%')
+     </if>
+   </where>
+    order by push_time desc
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="Integer" >
+    delete from `article`
+    where `id` = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="tech.model.article" >
+    insert into `article` (`id`, `title`, `push_time`,
+      `label_id`, `comment_num`, `content`,
+      `like_num`, `pay_id`,`cover_pic`,`intro`)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{pushTime,jdbcType=TIMESTAMP}, 
+      #{labelId,jdbcType=VARCHAR}, #{commentNum,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{likeNum,jdbcType=VARCHAR}, #{payId,jdbcType=VARCHAR},#{coverPic,jdbcType=VARCHAR},#{intro,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="tech.model.article" >
+    insert into `article`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="pushTime != null" >
+        push_time,
+      </if>
+      <if test="labelId != null" >
+        label_id,
+      </if>
+      <if test="commentNum != null" >
+        comment_num,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="likeNum != null" >
+        like_num,
+      </if>
+      <if test="payId != null" >
+        pay_id,
+      </if>
+      <if test="coverPic != null" >
+        cover_pic,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="pushTime != null" >
+        #{pushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="labelId != null" >
+        #{labelId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentNum != null" >
+        #{commentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="likeNum != null" >
+        #{likeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="payId != null" >
+        #{payId,jdbcType=VARCHAR},
+      </if>
+      <if test="coverPic != null" >
+        #{coverPic,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tech.model.article" >
+    update article
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="pushTime != null" >
+        push_time = #{pushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="labelId != null" >
+        label_id = #{labelId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentNum != null" >
+        comment_num = #{commentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="likeNum != null" >
+        like_num = #{likeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="payId != null" >
+        pay_id = #{payId,jdbcType=VARCHAR},
+      </if>
+      <if test="coverPic != null" >
+        pay_id = #{coverPic,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        pay_id = #{intro,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tech.model.article" >
+    update article
+    set title = #{title,jdbcType=VARCHAR},
+      push_time = #{pushTime,jdbcType=TIMESTAMP},
+      label_id = #{labelId,jdbcType=VARCHAR},
+      comment_num = #{commentNum,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      like_num = #{likeNum,jdbcType=VARCHAR},
+      pay_id = #{payId,jdbcType=VARCHAR},
+      cover_pic = #{coverPic,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="like"  parameterType="tech.model.article">
+    update article set like_num = like_num+1 where id = #{id,jdbcType=VARCHAR};
+  </update>
+</mapper>

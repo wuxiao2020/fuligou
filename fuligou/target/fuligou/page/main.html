@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>娱乐狗</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+
+ <style>
+     .layui-table-cell{
+         height: auto;
+         word-wrap: break-word;
+         white-space: normal;
+         word-break: break-all;
+     }
+     .thumb{
+         width:220px;
+         height: 150px;
+     }
+     .layui-table img{
+         max-width: 220px;
+     }
+     .newsHead h2 a{
+         font-size: 18px;
+         line-height: 1.4;
+         font-weight: bold;
+     }
+     .post-like,.comment-num{
+         float:right;
+         margin: 0px 5px;
+     }
+     .note{
+         font-size: 12px;
+         color:#999;
+         word-wrap: break-word;
+         line-height:22px;
+         margin-bottom:0;
+     }
+    .brand{
+         background-color: #01070e;
+         text-align: center;
+         padding: 30px 20px;
+     }
+     .btn-lg{
+         font-size: 18px;
+         margin: 10px 10px 10px 10px;
+         border-color: #ccc;
+         color:#fff;
+     }
+
+     .newsHead > div{
+         display: inline-block;
+     }
+ </style>
+
+
+</head>
+<body style="background-color:#f6f6f6">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">娱乐狗</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">娱乐狗</a></li>
+            <li class="layui-nav-item"><a href="">娱乐狗</a></li>
+            <li class="layui-nav-item"><a href="">娱乐狗</a></li>
+            <li class="layui-nav-item"><a href="">娱乐狗</a>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item"><a href="">搜索</a></li>
+        </ul>
+    </div>
+
+    <!--主页面的内容-->
+    <div class="layui-row">
+        <div class="layui-col-xs2">
+            <div class="grid-demo grid-demo-bg1">3/12</div>
+        </div>
+      <div class="layui-col-xs7">
+            <table class="layui-hide" id="test"></table>
+        </div>
+        <div class="layui-col-xs3">
+            <div class="grid-demo grid-demo-bg1">3/12</div>
+        </div>
+    </div>
+
+    <div class="brand">
+        <div class="container">
+            <a target="blank" class="btn-lg" href="http://quan.fulibus.net">福利狗</a>
+            <a target="blank" class="btn-lg" href="http://quan.fulibus.net">福利狗</a>
+            <a target="blank" class="btn-lg" href="http://quan.fulibus.net">福利狗</a>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script src="/fuligou/layui/layui.js"></script>
+<script src="/fuligou/js/jquery/jquery-2.2.3.min.js"></script>
+<script>
+    var table,layer,form,element;
+
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form','element','table'], function(){
+         layer = layui.layer;
+         form = layui.form;
+        element = layui.element;
+        table = layui.table;
+
+        var param = JSON.stringify({})
+        //ajax
+        $.ajax({
+            url: "/fuligou/article/query",
+            type: "POST",
+            contentType: "application/json",
+            data: param,
+            success: function (resp) {
+                debugger;
+                if (resp.respCode == "0000") {
+                    var tableData =resp.data;
+                    if(tableData){
+                        table.render({
+                            elem: '#test'
+                            ,limit:30
+                            ,cellMinWidth: 413 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                            ,cols: [[
+                                {field:'title',title:"最新数据", height:"150",height: "inherit", templet: '#article'}
+                            ]]
+                            ,page: true
+                            ,data:tableData
+                            ,done: function(res, curr, count){
+                                $('thead tr span').css({'font-size': '20px','font-weight': 'bolder'});
+                            }
+                        });
+                    }
+
+                }else{
+                    layer.msg(resp.respMsg);
+                }
+            },
+            error:function(){
+                layer.msg("系统忙，请稍后重试！");
+            }
+        });
+    });
+
+    //点赞
+    function like(id){
+        var param = JSON.stringify({id:id});
+        $.ajax({
+            url: "/fuligou/article/like",
+            type: "POST",
+            contentType: "application/json",
+            data: param,
+            success: function (resp) {
+                debugger;
+                if (resp.respCode == "0000") {
+                    layer.msg("感谢您的赞！");
+                    var likeNumHtml = $("span[data-id ="+id+"]").html();
+                    var likeNum = parseInt(likeNumHtml) + 1;
+                    $("span[data-id ="+id+"]").html(likeNum);
+                }else{
+                    layer.msg(resp.respMsg);
+                }
+            },
+            error:function(){
+                layer.msg("系统忙，请稍后重试！");
+            }
+        });
+
+    }
+</script>
+
+<script type="text/html" id="article">
+    <div class="layui-row">
+        <div class="layui-col-xs4">
+            <a target="_blank" class="focus" href="http://fulibus.net/99.html">
+                <img data-src={{d.coverPic}}
+                     src={{d.coverPic}}
+                     class="thumb" style="display: inline;">
+            </a>
+        </div>
+        <div class="layui-col-xs8">
+            <header class="newsHead">
+                <div>
+                    <a class="cat" href="http://fulibus.net/category/smzdm">购物网赚</a>
+                </div>
+                <div>
+                    <h2>
+                        <a target="_blank" href="/fuligou/page/article.html?article={{d.id}}"  title={{d.title}}>{{d.title}}</a>
+                    </h2>
+                </div>
+            </header>
+
+            <p class="meta">
+                <time><i class="fa fa-clock-o"></i>{{d.pushTime}}</time>
+                <a class="comment-num" href="http://fulibus.net/auto10.html#comments"><i class="fa fa-comments-o"></i>评论(
+                    {{# if(d.commentNum == null) { }}
+                    0
+                    {{# }else{ }}
+                    {{d.commentNum}}
+                    {{# } }}
+                    )</a>
+                <a href="javascript:;" class="post-like" onclick="like({{d.id}})" ><i class="fa fa-thumbs-o-up"></i>赞(
+                    <span data-id ="{{d.id}}">
+                    {{# if(d.likeNum == null) { }}
+                         0
+                    {{# }else{ }}
+                     {{d.likeNum}}
+                    {{# } }}
+                </span>)</a>
+            </p>
+
+            <p class="note">
+                {{# if(d.intro == null) { }}
+                {{# }else{ }}
+                {{d.intro}}
+                {{# } }}
+            </p>
+        </div>
+    </div>
+</script>
+
+</html>

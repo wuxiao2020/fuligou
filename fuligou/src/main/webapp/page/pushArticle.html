@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ueditor demo</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/fuligou/layui/css/layui.css">
+</head>
+<style>
+    .title,.intro,#btns,.coverPic{
+        margin:20px;
+    }
+    #form >div > div{
+        display: inline-block;
+    }
+
+</style>
+
+<body>
+<form id="form">
+    <div class="title">
+        <div><label>标题：</label></div>
+        <div>
+            <input type="text" id="title" name ="title" lay-verify="required" placeholder="请输入标题" style="width:400px;">
+        </div>
+    </div>
+    <div class="intro">
+        <div><label>简介：</label></div>
+        <div>
+            <input type="text" id="intro" name ="intro" lay-verify="required" placeholder="请输入简介" style="width:500px;">
+        </div>
+
+    </div>
+    <div class="coverPic">
+        <div><label>封面图：</label></div>
+        <div>
+            <input type="text" id="coverPic" name ="coverPic"  style="width:500px;">
+        </div>
+
+    </div>
+</form>
+<!-- 加载编辑器的容器 -->
+<script id="container" name="content" type="text/plain">
+        这里写你的初始化内容
+    </script>
+<div id="btns">
+    <button onclick="save()">提交</button>
+</div>
+
+
+<!-- 配置文件 -->
+<script type="text/javascript" src="/fuligou/tool/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/fuligou/tool/ueditor/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+</script>
+<script src="/fuligou/js/jquery/jquery-2.2.3.min.js"></script>
+<script src="/fuligou/layui/layui.js"></script>
+
+
+</body>
+
+<script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form','element'], function(){
+        var layer = layui.layer
+            ,form = layui.form;
+        var element = layui.element;
+    });
+</script>
+
+
+<script>
+    function save(){
+        var content = UE.getEditor('container').getContent();
+        var title = $("#title").val();
+        var coverPic = $("#coverPic").val();
+        var intro = $("#intro").val();
+        var param = JSON.stringify({content:content,title:title,coverPic:coverPic,intro:intro})
+        //ajax
+        $.ajax({
+            url: "/fuligou/article/add",
+            type: "POST",
+            contentType: "application/json",
+            data: param,
+            success: function (resp) {
+                debugger;
+                if (resp.respCode == "0000") {
+                    layer.msg("新增成功！");
+                    //清理表单数据
+                    $("#form")[0].reset();
+                    UE.getEditor('container').setContent("");
+                }else{
+                    layer.msg(resp.respMsg);
+                }
+            },
+            error:function(){
+                layer.msg("系统忙，请稍后重试！");
+            }
+        });
+
+    }
+</script>
+</html>
