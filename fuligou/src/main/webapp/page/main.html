@@ -5,54 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <title>技术宅的大杂烩</title>
     <link rel="stylesheet" href="../layui/css/layui.css">
-
- <style>
-     .layui-table-cell{
-         height: auto;
-         word-wrap: break-word;
-         white-space: normal;
-         word-break: break-all;
-     }
-     .thumb{
-         width:220px;
-         height: 150px;
-     }
-     .layui-table img{
-         max-width: 220px;
-     }
-     .newsHead h2 a{
-         font-size: 18px;
-         line-height: 1.4;
-         font-weight: bold;
-     }
-     .post-like,.comment-num{
-         float:right;
-         margin: 0px 5px;
-     }
-     .note{
-         font-size: 12px;
-         color:#999;
-         word-wrap: break-word;
-         line-height:22px;
-         margin-bottom:0;
-     }
-    .brand{
-         background-color: #01070e;
-         text-align: center;
-         padding: 30px 20px;
-     }
-     .btn-lg{
-         font-size: 18px;
-         margin: 10px 10px 10px 10px;
-         border-color: #ccc;
-         color:#fff;
-     }
-
-     .newsHead > div{
-         display: inline-block;
-     }
- </style>
-
+    <link rel="stylesheet" href="../css/article/main.css">
 
 </head>
 <body style="background-color:#f6f6f6">
@@ -99,18 +52,20 @@
 </body>
 <script src="/fuligou/layui/layui.js"></script>
 <script src="/fuligou/js/jquery/jquery-2.2.3.min.js"></script>
+<script src="/fuligou/js/fuligou/article.js"></script>
+
 <script>
     var table,layer,form,element;
 
     //一般直接写在一个js文件中
     layui.use(['layer', 'form','element','table'], function(){
-         layer = layui.layer;
-         form = layui.form;
+        layer = layui.layer;
+        form = layui.form;
         element = layui.element;
         table = layui.table;
 
         var param = JSON.stringify({})
-        //ajax
+//ajax
         $.ajax({
             url: "/fuligou/article/query",
             type: "POST",
@@ -145,32 +100,6 @@
             }
         });
     });
-
-    //点赞
-    function like(id){
-        var param = JSON.stringify({id:id});
-        $.ajax({
-            url: "/fuligou/article/like",
-            type: "POST",
-            contentType: "application/json",
-            data: param,
-            success: function (resp) {
-                debugger;
-                if (resp.respCode == "0000") {
-                    layer.msg("感谢您的赞！");
-                    var likeNumHtml = $("span[data-id ="+id+"]").html();
-                    var likeNum = parseInt(likeNumHtml) + 1;
-                    $("span[data-id ="+id+"]").html(likeNum);
-                }else{
-                    layer.msg(resp.respMsg);
-                }
-            },
-            error:function(){
-                layer.msg("系统忙，请稍后重试！");
-            }
-        });
-
-    }
 </script>
 
 <script type="text/html" id="article">
@@ -222,5 +151,4 @@
         </div>
     </div>
 </script>
-
 </html>

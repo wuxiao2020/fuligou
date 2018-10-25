@@ -5,79 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>消息详情</title>
     <link rel="stylesheet" href="../layui/css/layui.css">
-
- <style>
-
-     .rewards-popover{
-         display: block;
-         padding: 10px 20px 20px 50px;
-     }
-     .rewards-popover h3{
-         font-size: 18px;
-         font-weight: bold;
-         text-align: center;
-         margin: 0 0px 25px;
-     }
-     .rewards-popover h4{
-         margin: 4px 0px;
-     }
-
-    .rewards-popover-item{
-        text-align: center;
-        width: 200px;
-        display:inline-block;
-        margin: 0 25px;
-    }
-
-    .rewards-popover-item img{
-        width: 200px;
-        height: 200px;
-        padding: 5px;
-        border-radius: 10px;
-        background-color: #eee;
-    }
-
-     .layui-row{
-         margin:20px 0;
-     }
-
-     .layui-row > div{
-         display: inline-block;
-         margin: 0px 10px;
-         background-color: #fff;
-     }
-     .layui-col-xs3{
-         width: 20%;
-     }
-
-
-    /* article css*/
-    .newsContent {
-        background-color: #FFFFFF;
-    }
-    .title{
-    text-align: center;
-    margin: 30px 0;
-    }
-     .newsActionsDiv > div{
-         display:inline-block;
-         cursor: pointer;
-         margin:0 20px;
-     }
-     .newsActions{
-         text-align: center;
-     }
-
-     #editor{
-         margin: 0px 20px;
-         word-break: break-all;
-     }
-     #editor img{
-         width: 100%;
-         height: 100%;
-     }
-
- </style>
+    <link rel="stylesheet" href="../css/article/article.css">
 </head>
 
 <body style="background-color:#f6f6f6">
@@ -105,7 +33,6 @@
     </div>
 
 
-
     <!--主页面的内容-->
     <div class="layui-row">
         <div class="layui-col-xs2">
@@ -115,23 +42,61 @@
             <h2 class="title"></h2>
             <div class="editor" id="editor">
             </div>
-                <div class="newsActions">
-                    <div class="newsActionsDiv">
-                        <div class="icons likeNews">
-                            <img src="../img/icon/like.png">
-                            点赞(<span id="like">
+            <div class="newsActions">
+                <div class="newsActionsDiv">
+                    <div class="icons likeNews">
+                        <img src="../img/icon/like.png">
+                        点赞(<span id="like">
                                 0
                             </span>)
-                        </div>
-                        <div class="icons pay" id="pay">
-                            <img src="../img/icon/pay.png">
-                            <span>
+                    </div>
+                    <div class="icons pay" id="pay">
+                        <img src="../img/icon/pay.png">
+                        <span>
                                 打赏
                             </span>
-                        </div>
-
                     </div>
+
                 </div>
+            </div>
+            <div class="commitDiv">
+                <div class="commitNum">评论<span class="commitNum">0</span></div>
+                <div class="commitFrame">
+                        <form method="post" id="commentform">
+                            <div class="comt">
+                                <div class="comt-title">
+                                    <img data-src="http://fulibus.net/wp-content/uploads/2018/07/006a0xdJgw1evv94zexszj302s02sglg.jpg" width="40" height="40" alt="" class="avatar avatar-50 wp-user-avatar wp-user-avatar-50 photo avatar-default" src="http://fulibus.net/wp-content/uploads/2018/07/006a0xdJgw1evv94zexszj302s02sglg.jpg" style="display: inline;">				<p><a id="cancel-comment-reply-link" href="javascript:;">取消</a></p>
+                                </div>
+                                <div class="comt-box">
+                                    <textarea placeholder="评论人工审核，请勿发表违规内容、无意义内容" class="input-block-level comt-area" name="comment" id="comment" cols="100%" rows="3" tabindex="1" onkeydown="if(event.ctrlKey&amp;&amp;event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
+                                    <div class="comt-ctrl">
+                                        <div class="comt-tips"><input type="hidden" name="comment_post_ID" value="52419" id="comment_post_ID">
+                                            <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+                                            <label for="comment_mail_notify" class="checkbox inline hide" style="padding-top:0"><input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked">有人回复时邮件通知我</label><div class="comt-tip comt-loading" style="display: none;">评论提交中...</div><div class="comt-tip comt-error" style="display: none;">#</div></div>
+                                        <button type="submit" name="submit" id="submit" tabindex="5">提交评论</button>
+                                        <!-- <span data-type="comment-insert-smilie" class="muted comt-smilie"><i class="icon-thumbs-up icon12"></i> 表情</span> -->
+                                    </div>
+                                </div>
+
+                                <div class="comt-comterinfo" id="comment-author-info">
+                                    <ul>
+                                        <li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="text-muted">昵称 (必填)</span></li>
+                                        <li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="text-muted">邮箱 (必填)</span></li>
+                                        <li class="form-inline"><label class="hide" for="url">网址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="网址"><span class="text-muted">网址</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                </div>
+            </div>
+
+            <div class="commitUser">
+                    <ol class="commentlist">
+
+                    </ol>
+                    <div class="pagenav">
+                    </div>
+            </div>
         </div>
 
             <div class="layui-col-xs3">
@@ -144,99 +109,7 @@
 
 <script src="../layui/layui.js"></script>
 <script src="../js/jquery/jquery-2.2.3.min.js"></script>
-<script>
-    //一般直接写在一个js文件中
-    layui.use(['layer', 'form','element','table'], function(){
-        var layer = layui.layer
-            ,form = layui.form;
-        var element = layui.element;
-        var table = layui.table;
-    });
-
-    $("#pay").on("click",function(){
-        layer.open({
-            type: 1,
-            title:'打赏页',
-            area: ['600px', '360px'], //宽高
-            content: '<div class="rewards-popover">' +
-            '<h3>觉得文章有用就打赏一下文章作者</h3>' +
-            '<div class="rewards-popover-item">' +
-            '<h4>支付宝扫一扫打赏</h4>' +
-            '<img src="http://wx4.sinaimg.cn/mw690/9956d663gy1fwdpf4m8nij209109040s.jpg">' +
-            '</div>' +
-            '<div class="rewards-popover-item">' +
-            '<h4>微信扫一扫打赏</h4>' +
-            '<img src="//wx2.sinaimg.cn/mw690/9956d663gy1fwdpf6wuf6j20dw0dymzo.jpg">' +
-            '</div>' +
-            '<span class="rewards-popover-close" data-event="rewards-close"><i class="fa fa-close"></i></span>' +
-            '</div>'
-        });
-    });
-
-    function getQueryString(name) {
-        var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
-        if (result == null || result.length < 1) {
-            return "";
-        }
-        return result[1];
-    };
-</script>
-
-<script>
-    $(function(){
-        var id= getQueryString("article");
-        var param = JSON.stringify({id:id})
-        $.ajax({
-            url: "/fuligou/article/queryById",
-            type: "POST",
-            contentType: "application/json",
-            data: param,
-            success: function (resp) {
-                debugger;
-                if (resp.respCode == "0000") {
-                    var data =resp.data;
-                    $(".title").html(data.title);
-                    $("#editor").append(data.content);
-                    $("#like").html(data.likeNum);
-                    $(".likeNews").attr("onclick","like("+ id+")");
-                }else{
-                    layer.msg(resp.respMsg);
-                }
-            },
-            error:function(){
-                layer.msg("系统忙，请稍后重试！");
-            }
-        });
-    });
-
-
-    //点赞
-    function like(id){
-        var param = JSON.stringify({id:id});
-        $.ajax({
-            url: "/fuligou/article/like",
-            type: "POST",
-            contentType: "application/json",
-            data: param,
-            success: function (resp) {
-                debugger;
-                if (resp.respCode == "0000") {
-                    layer.msg("感谢您的赞！");
-                    var likeNumHtml = $("#like").html();
-                    var likeNum = parseInt(likeNumHtml) + 1;
-                    $("#like").html(likeNum);
-                }else{
-                    layer.msg(resp.respMsg);
-                }
-            },
-            error:function(){
-                layer.msg("系统忙，请稍后重试！");
-            }
-        });
-
-    }
-</script>
-
+<script src="../js/fuligou/article.js"></script>
 
 
 </html>
