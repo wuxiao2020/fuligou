@@ -51,5 +51,6 @@
     <mvc:resources location="/" mapping="/**/*.jpg" />
     <mvc:resources location="/" mapping="/**/*.eot" />
     <mvc:resources location="/" mapping="/**/*.gif" />
+    <mvc:resources location="/" mapping="/**/*.ico" />
 
 </beans>
