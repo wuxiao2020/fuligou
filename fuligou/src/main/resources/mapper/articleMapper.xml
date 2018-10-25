@@ -172,6 +172,6 @@
   </update>
 
   <update id="like"  parameterType="tech.model.article">
-    update article set like_num = like_num+1 where id = #{id,jdbcType=VARCHAR};
+    update article set like_num = IFNULL(like_num,0)+1 where id = #{id,jdbcType=VARCHAR};
   </update>
 </mapper>
