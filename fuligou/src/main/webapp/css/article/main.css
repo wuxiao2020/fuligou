@@ -1,0 +1,44 @@
+.layui-table-cell{
+    height: auto;
+    word-wrap: break-word;
+    white-space: normal;
+    word-break: break-all;
+}
+.thumb{
+    width:220px;
+    height: 150px;
+}
+.layui-table img{
+    max-width: 220px;
+}
+.newsHead h2 a{
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: bold;
+}
+.post-like,.comment-num{
+    float:right;
+    margin: 0px 5px;
+}
+.note{
+    font-size: 12px;
+    color:#999;
+    word-wrap: break-word;
+    line-height:22px;
+    margin-bottom:0;
+}
+.brand{
+    background-color: #01070e;
+    text-align: center;
+    padding: 30px 20px;
+}
+.btn-lg{
+    font-size: 18px;
+    margin: 10px 10px 10px 10px;
+    border-color: #ccc;
+    color:#fff;
+}
+
+.newsHead > div{
+    display: inline-block;
+}
