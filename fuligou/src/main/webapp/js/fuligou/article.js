@@ -58,6 +58,8 @@ $(function(){
             layer.msg("系统忙，请稍后重试！");
         }
     });
+
+    pageView("article");
 });
 
 
