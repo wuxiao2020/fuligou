@@ -1,5 +1,6 @@
 package tech.dao;
 
+import com.alibaba.fastjson.JSONObject;
 import tech.model.pageView;
 
 public interface pageViewMapper {
@@ -14,4 +15,6 @@ public interface pageViewMapper {
     int updateByPrimaryKeySelective(pageView record);
 
     int updateByPrimaryKey(pageView record);
+
+    int pageViewNum(pageView pg);
 }

@@ -45,15 +45,26 @@
 .newsContent {
     background-color: #FFFFFF;
 }
+.article-header{
+    padding: 25px 0;
+    border-bottom: 1px solid #b3a6a6;
+    text-align: center;
+}
 .title{
     text-align: center;
-    margin: 30px 0;
+    margin: 20px 0;
 }
 .newsActionsDiv > div{
     display:inline-block;
     cursor: pointer;
     margin:0 20px;
 }
+.article-meta > div{
+    display : inline-block;
+    margin: 0 10px;
+    color: #99A;
+}
+
 .newsActions{
     text-align: center;
 }

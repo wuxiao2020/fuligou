@@ -22,4 +22,8 @@ public class StatisticServiceImpl implements StatisticService {
         pageViewdao.insert(new pageView(name,new Date(),ip));
 
     }
+
+    public int pageViewNum(pageView pg) {
+        return pageViewdao.pageViewNum(pg);
+    }
 }

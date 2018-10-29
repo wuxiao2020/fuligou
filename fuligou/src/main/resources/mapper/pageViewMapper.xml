@@ -79,4 +79,7 @@
       `ip` = #{ip,jdbcType=VARCHAR}
     where `id` = #{id,jdbcType=INTEGER}
   </update>
+  <select id="pageViewNum" parameterType="tech.model.pageView" resultType="int">
+    SELECT COUNT(*) FROM `page_view` WHERE `NAME` = #{name,jdbcType=VARCHAR}
+  </select>
 </mapper>

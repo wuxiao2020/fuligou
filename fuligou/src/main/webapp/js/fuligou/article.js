@@ -47,6 +47,8 @@ $(function(){
             if (resp.respCode == "0000") {
                 var data =resp.data;
                 $(".title").html(data.title);
+                $(".article-time-str").html(data.pushTime);
+                $(".article-commit-num").html(data.commentNum);
                 $("#editor").append(data.content);
                 $("#like").html(data.likeNum);
                 $(".likeNews").attr("onclick","like("+ id+")");
@@ -59,8 +61,8 @@ $(function(){
         }
     });
 
-    pageView("article");
 });
+
 
 
 //点赞
