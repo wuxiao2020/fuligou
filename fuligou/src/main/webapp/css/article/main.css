@@ -82,4 +82,18 @@
 }
 
 
+.cover-labelName{
+    top: 0;
+    left: 0;
+    position: absolute;
+    background: #ff0e00;
+    width: auto;
+    padding: 0px 8px;
+    border-radius: 2px;
+    color: white;
+    float: left;
+    display: inline-block;
+}
+
+
 

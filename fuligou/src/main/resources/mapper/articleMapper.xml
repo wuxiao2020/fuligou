@@ -35,17 +35,18 @@
 
   <select id="query" resultMap="BaseResultMap" parameterType="tech.model.article" >
     select
-    `id`, `title`, `push_time`, `label_id`, `comment_num`, `like_num`, `pay_id`,`cover_pic`,`intro`
-    from `article`
+    t1.`id`,  t1.`title`,  t1.`push_time`,  t1.`label_id`,  t1.`comment_num`,  t1.`like_num`,  t1.`pay_id`, t1.`cover_pic`, t1.`intro`,t2.`label_name`
+    from `article` t1
+  left join `label` t2 on t1.label_id = t2.id
    <where>
      <if test="id != null" >
-     and id = #{id,jdbcType=INTEGER}
+     and t1.id = #{id,jdbcType=INTEGER}
      </if>
      <if test="title != null" >
-     and title like concat('%', #{title,jdbcType=VARCHAR},'%')
+     and t1.title like concat('%', #{title,jdbcType=VARCHAR},'%')
      </if>
    </where>
-    order by push_time desc
+    order by t1.push_time desc
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="Integer" >
