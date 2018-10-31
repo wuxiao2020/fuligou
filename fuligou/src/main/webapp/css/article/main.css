@@ -39,6 +39,12 @@
     color:#fff;
 }
 
+.layui-logo a img{
+    width: 200px;
+    height: 60px;
+    cursor: pointer;
+}
+
 .newsHead > div{
     display: inline-block;
 }
@@ -65,10 +71,10 @@
 
 @keyframes myfirst
 {
-    0% {background:blue;}
-    12% {background:cornflowerblue;}
-    30% {background:palevioletred;}
-    42% {background:pink;}
+    0% {background:palevioletred;}
+    12% {background:pink;}
+    30% {background:blue;}
+    42% {background:cornflowerblue;}
     56% {background:green;}
     69% {background:darkslategrey;}
     82% {background:yellowgreen;}
