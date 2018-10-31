@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tech.dao.LabelMapper" >
+  <resultMap id="BaseResultMap" type="tech.model.Label" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="label_name" property="labelName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    `id`, `label_name`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from `label`
+    where `id` = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `label`
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Integer" >
+    delete from `label`
+    where `id` = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="tech.model.Label" >
+    insert into `label` (`id`, `label_name`)
+    values (#{id,jdbcType=INTEGER}, #{labelName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="tech.model.Label" >
+    insert into `label`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        `id`,
+      </if>
+      <if test="labelName != null" >
+        `label_name`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="labelName != null" >
+        #{labelName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tech.model.Label" >
+    update `label`
+    <set >
+      <if test="labelName != null" >
+        `label_name` = #{labelName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where `id` = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tech.model.Label" >
+    update `label`
+    set `label_name` = #{labelName,jdbcType=VARCHAR}
+    where `id` = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
