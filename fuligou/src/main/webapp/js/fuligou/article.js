@@ -1,10 +1,3 @@
-//一般直接写在一个js文件中
-layui.use(['layer', 'form','element','table'], function(){
-    var layer = layui.layer
-        ,form = layui.form;
-    var element = layui.element;
-    var table = layui.table;
-});
 
 $("#pay").on("click",function(){
     layer.open({
@@ -34,37 +27,6 @@ function getQueryString(name) {
     return result[1];
 };
 
-$(function(){
-    var id= getQueryString("article");
-    var param = JSON.stringify({id:id})
-    $.ajax({
-        url: "/fuligou/article/queryById",
-        type: "POST",
-        contentType: "application/json",
-        data: param,
-        success: function (resp) {
-            debugger;
-            if (resp.respCode == "0000") {
-                var data =resp.data;
-                $(".title").html(data.title);
-                $(".article-time-str").html(data.pushTime);
-                $(".article-commit-num").html(data.commentNum);
-                $("#editor").append(data.content);
-                $("#like").html(data.likeNum);
-                $(".likeNews").attr("onclick","like("+ id+")");
-            }else{
-                layer.msg(resp.respMsg);
-            }
-        },
-        error:function(){
-            layer.msg("系统忙，请稍后重试！");
-        }
-    });
-
-});
-
-
-
 //点赞
 function like(id){
     var param = JSON.stringify({id:id});
@@ -90,3 +52,34 @@ function like(id){
     });
 
 }
+
+
+$(function(){
+    var id= getQueryString("article");
+    var param = JSON.stringify({id:id})
+    $.ajax({
+        url: "/fuligou/article/queryById",
+        type: "POST",
+        contentType: "application/json",
+        data: param,
+        success: function (resp) {
+            debugger;
+            if (resp.respCode == "0000") {
+                var data =resp.data;
+                $(".title").html(data.title);
+                $(".article-time-str").html(data.pushTime);
+                $(".article-commit-num").html(data.commentNum);
+                $("#editor").append(data.content);
+                $("#like").html(data.likeNum);
+                $(".likeNews").attr("onclick","like("+ id+")");
+                $(".article-label-name").html(data.labelName);
+            }else{
+                layer.msg(resp.respMsg);
+            }
+        },
+        error:function(){
+            layer.msg("系统忙，请稍后重试！");
+        }
+    });
+
+});

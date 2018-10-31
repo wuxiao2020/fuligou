@@ -42,3 +42,30 @@
 .newsHead > div{
     display: inline-block;
 }
+
+.hotLabel > a{
+    display: inline-block;
+    width: 39%;
+    color: #fff;
+    padding: 3px 6px;
+    margin: 4px 0px 0 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: 5px;
+    animation:myfirst 5s infinite; /*animation 时间 播放次数*/
+    animation-direction:alternate; /*是否循环交替反向播放动画*/    
+}
+
+@keyframes myfirst
+{
+    0% {background:blue;}
+    12% {background:cornflowerblue;}
+    30% {background:palevioletred;}
+    42% {background:pink;}
+    56% {background:green;}
+    69% {background:darkslategrey;}
+    82% {background:yellowgreen;}
+    100% {background:purple;}
+}
+
+

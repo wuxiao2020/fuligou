@@ -12,19 +12,13 @@
 
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">layui 后台布局</div>
+        <div class="layui-logo">技术宅的大杂烩</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">控制台</a></li>
-            <li class="layui-nav-item"><a href="">商品管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">其它系统</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">邮件管理</a></dd>
-                    <dd><a href="">消息管理</a></dd>
-                    <dd><a href="">授权管理</a></dd>
-                </dl>
+            <li class="layui-nav-item"><a href="">技术宅的大杂烩</a></li>
+            <li class="layui-nav-item"><a href="">技术宅的大杂烩</a></li>
+            <li class="layui-nav-item"><a href="">技术宅的大杂烩</a></li>
+            <li class="layui-nav-item"><a href="">技术宅的大杂烩</a>
             </li>
         </ul>
         <ul class="layui-nav layui-layout-right">
@@ -99,6 +93,16 @@
 
 <script src="../layui/layui.js"></script>
 <script src="../js/jquery/jquery-2.2.3.min.js"></script>
+<script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form','element','table'], function(){
+        var layer = layui.layer
+            ,form = layui.form;
+        var element = layui.element;
+        var table = layui.table;
+    });
+
+</script>
 <script src="../js/fuligou/article.js"></script>
 
 

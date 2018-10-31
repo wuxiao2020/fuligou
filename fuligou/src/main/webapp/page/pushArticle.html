@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="/fuligou/layui/css/layui.css">
 </head>
 <style>
-    .title,.intro,#btns,.coverPic{
+    .title,.intro,#btns,.coverPic,.label{
         margin:20px;
+    }
+    #label{
+        width: 200%;
     }
     #form >div > div{
         display: inline-block;
@@ -30,19 +33,27 @@
         <div>
             <input type="text" id="intro" name ="intro" lay-verify="required" placeholder="请输入简介" style="width:500px;">
         </div>
-
     </div>
     <div class="coverPic">
         <div><label>封面图：</label></div>
         <div>
             <input type="text" id="coverPic" name ="coverPic"  style="width:500px;">
         </div>
-
     </div>
+    <div class="label">
+        <div><label>分类：</label></div>
+        <div>
+            <select name="label" lay-verify="required" id="label">
+                <option value="">请选择</option>
+                <option value="1">娱乐</option>
+            </select>
+        </div>
+    </div>
+
 </form>
 <!-- 加载编辑器的容器 -->
 <script id="container" name="content" type="text/plain">
-        这里写你的初始化内容
+
     </script>
 <div id="btns">
     <button onclick="save()">提交</button>
@@ -71,7 +82,34 @@
             ,form = layui.form;
         var element = layui.element;
 
-        pageView("pushArticle");
+
+        //分类
+        $.ajax({
+            url: "/fuligou/label/query",
+            type: "POST",
+            contentType: "application/json",
+            data:"",
+            success: function (resp) {
+                debugger;
+                if (resp.respCode == "0000") {
+                    var deptData = resp.data;
+                    $("#label").empty();
+                    $("#label").append(" <option value=''>请选择</option>");
+
+                    $.each(deptData,function(index,value){
+                        $("#label").append(" <option value='"+ value.id +"'>"+ value.labelName +"</option>");
+                    })
+
+                    form.render('select');
+                }else{
+                    layer.msg(resp.respMsg);
+                }
+            },
+            error:function(){
+                layer.msg("系统忙，请稍后重试！");
+            }
+        });
+
     });
 </script>
 
@@ -82,7 +120,8 @@
         var title = $("#title").val();
         var coverPic = $("#coverPic").val();
         var intro = $("#intro").val();
-        var param = JSON.stringify({content:content,title:title,coverPic:coverPic,intro:intro})
+        var labelId = $("#label").val();
+        var param = JSON.stringify({content:content,title:title,coverPic:coverPic,intro:intro,labelId:labelId})
         //ajax
         $.ajax({
             url: "/fuligou/article/add",

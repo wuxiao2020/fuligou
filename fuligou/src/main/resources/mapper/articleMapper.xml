@@ -12,22 +12,25 @@
     <result column="pay_id" property="payId" jdbcType="VARCHAR" />
     <result column="cover_pic" property="coverPic" jdbcType="VARCHAR" />
     <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="label_name" property="labelName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    `id`, `title`, `push_time`, `label_id`, `comment_num`, `content`, `like_num`, `pay_id`,`cover_pic`,`intro`
+    t1.`id`, t1.`title`, t1.`push_time`, t1.`label_id`, t1.`comment_num`, t1.`content`, t1.`like_num`, t1.`pay_id`,t1.`cover_pic`,t1.`intro`,t2.`label_name`
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Integer" >
     select 
     <include refid="Base_Column_List" />
-    from `article`
-    where `id` = #{id,jdbcType=INTEGER}
+    from `article` t1
+    left join `label` t2 on t1.label_id = t2.id
+    where t1.`id` = #{id,jdbcType=INTEGER}
   </select>
 
   <select id="queryById" resultMap="BaseResultMap" parameterType="tech.model.article" >
     select
     <include refid="Base_Column_List" />
-    from `article`
-    where `id` = #{id,jdbcType=INTEGER}
+    from `article` t1
+    left join `label` t2 on t1.label_id = t2.id
+    where t1.`id` = #{id,jdbcType=INTEGER}
   </select>
 
   <select id="query" resultMap="BaseResultMap" parameterType="tech.model.article" >

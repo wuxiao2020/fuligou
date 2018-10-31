@@ -26,6 +26,8 @@ public class article {
 
     private String intro;
 
+    private String labelName;
+
 
     public String getIntro() {
         return intro;
@@ -105,5 +107,13 @@ public class article {
 
     public void setPayId(String payId) {
         this.payId = payId;
+    }
+
+    public String getLabelName() {
+        return labelName;
+    }
+
+    public void setLabelName(String labelName) {
+        this.labelName = labelName;
     }
 }
