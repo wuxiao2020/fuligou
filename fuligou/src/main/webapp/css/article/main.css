@@ -43,6 +43,11 @@
     display: inline-block;
 }
 
+.hotLabel h3{
+    border-bottom: 1px blue solid;
+    padding: 15px 5px;
+}
+
 .hotLabel > a{
     display: inline-block;
     width: 39%;
@@ -52,8 +57,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     border-radius: 5px;
-    animation:myfirst 5s infinite; /*animation 时间 播放次数*/
-    animation-direction:alternate; /*是否循环交替反向播放动画*/    
+    /*animation 时间 播放次数*/
+    animation:myfirst 5s infinite;
+    /*是否循环交替反向播放动画*/
+    animation-direction:alternate;
 }
 
 @keyframes myfirst
@@ -67,5 +74,6 @@
     82% {background:yellowgreen;}
     100% {background:purple;}
 }
+
 
 

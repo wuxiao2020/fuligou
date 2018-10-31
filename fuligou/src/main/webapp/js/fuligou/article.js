@@ -55,6 +55,8 @@ function like(id){
 
 
 $(function(){
+
+    //首页
     var id= getQueryString("article");
     var param = JSON.stringify({id:id})
     $.ajax({
