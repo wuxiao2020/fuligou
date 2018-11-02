@@ -9,17 +9,8 @@
     height: 150px;
 }
 
-.layui-col-xs4{
-    overflow: hidden;
-}
-.layui-table img:hover{
-    transform: scale(1.4);
-}
-
 .layui-table img{
     max-width: 220px;
-    cursor: pointer;
-    transition: all 0.6s;
 }
 
 .newsHead h2 a{

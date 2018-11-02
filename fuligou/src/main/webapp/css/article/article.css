@@ -1,3 +1,9 @@
+.layui-logo a img{
+    width: 200px;
+    height: 60px;
+    cursor: pointer;
+}
+
 .rewards-popover{
     display: block;
     padding: 10px 20px 20px 50px;
@@ -34,10 +40,41 @@
 .layui-row > div{
     display: inline-block;
     margin: 0px 10px;
-    background-color: #fff;
 }
 .layui-col-xs3{
     width: 20%;
+}
+
+.hotLabel h3{
+    border-bottom: 1px blue solid;
+    padding: 15px 5px;
+}
+
+.hotLabel > a{
+    display: inline-block;
+    width: 39%;
+    color: #fff;
+    padding: 3px 6px;
+    margin: 4px 0px 0 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: 5px;
+    /*animation 时间 播放次数*/
+    animation:myfirst 5s infinite;
+    /*是否循环交替反向播放动画*/
+    animation-direction:alternate;
+}
+
+@keyframes myfirst
+{
+    0% {background:palevioletred;}
+    12% {background:pink;}
+    30% {background:blue;}
+    42% {background:cornflowerblue;}
+    56% {background:green;}
+    69% {background:darkslategrey;}
+    82% {background:yellowgreen;}
+    100% {background:purple;}
 }
 
 

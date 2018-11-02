@@ -84,4 +84,27 @@ $(function(){
         }
     });
 
+    //标签
+    $.ajax({
+        url: "/fuligou/label/query",
+        type: "POST",
+        contentType: "application/json",
+        data: param,
+        success: function (resp) {
+            debugger;
+            if (resp.respCode == "0000") {
+                $(".hotLabel").empty();
+                $(".hotLabel").append("<h3>热门标签</h3>");
+                $.each(resp.data,function(index,item){
+                    $(".hotLabel").append("<a href='javascript:;'>" + item.labelName + "</a>");
+                });
+            }else{
+                layer.msg(resp.respMsg);
+            }
+        },
+        error:function(){
+            layer.msg("系统忙，请稍后重试！");
+        }
+    });
+
 });
