@@ -32,8 +32,16 @@
 .brand{
     background-color: #01070e;
     text-align: center;
-    padding: 30px 20px;
+    padding: 20px 10px;
 }
+.brand > div{
+    margin: 5px 0;
+}
+
+.security-feedback-info span{
+    color:#cac6c6;
+}
+
 .btn-lg{
     font-size: 18px;
     margin: 10px 10px 10px 10px;

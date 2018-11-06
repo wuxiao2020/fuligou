@@ -67,14 +67,15 @@ $(function(){
         success: function (resp) {
             debugger;
             if (resp.respCode == "0000") {
-                var data =resp.data;
-                $(".title").html(data.title);
-                $(".article-time-str").html(data.pushTime);
-                $(".article-commit-num").html(data.commentNum);
-                $("#editor").append(data.content);
-                $("#like").html(data.likeNum);
+                var param =resp.data;
+                $(".title").html(param.title);
+                $(".article-time-str").html(param.pushTime);
+                $(".article-commit-num").html(param.commentNum);
+                $("#editor").append(param.content);
+                $("#like").html(param.likeNum);
                 $(".likeNews").attr("onclick","like("+ id+")");
-                $(".article-label-name").html(data.labelName);
+                $(".article-label-name").html(param.labelName);
+                $(".articleId").val(param.articleId);
             }else{
                 layer.msg(resp.respMsg);
             }
@@ -106,5 +107,7 @@ $(function(){
             layer.msg("系统忙，请稍后重试！");
         }
     });
+
+
 
 });

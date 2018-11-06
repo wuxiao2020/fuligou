@@ -79,23 +79,67 @@
                 </div>
             </div>
             <div class="commitDiv">
-                <div class="commitNum">评论<span class="commitNum">0</span></div>
-                <div class="commitFrame">
+                <div class="commit-div">
+                    <div>
+                        <h2>评论</h2>
+                    </div>
+                    <div>
+                        <h2 class="commitNum">0</h2>
+                    </div>
                 </div>
+
+                <form class="layui-form" id="formDemo">
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">评论</label>
+                        <div class="layui-input-block">
+                            <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">昵称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="user" required  lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+
+
+
             </div>
 
             <div class="commitUser">
                     <ol class="commentlist">
-
                     </ol>
                     <div class="pagenav">
                     </div>
             </div>
+
         </div>
 
             <div class="layui-col-xs3">
                 <div class="grid-demo grid-demo-bg1">右侧栏</div>
             </div>
+    </div>
+
+    <div class="brand">
+        <div class="container">
+            <a target="blank" class="btn-lg" href="">技术宅的大杂烩</a>
+            <a target="blank" class="btn-lg" href="">技术宅的大杂烩</a>
+            <a target="blank" class="btn-lg" href="">技术宅的大杂烩</a>
+        </div>
+        <div class="security">
+            <div class="security-feedback-info">
+                <span>2018&nbsp;©&nbsp;技术宅的大杂烩&nbsp;|&nbsp;沪ICP备18040088号&nbsp;|&nbsp;一颗孤独的星&nbsp;</span>
+            </div>
+        </div>
     </div>
 </div>
 </body>
@@ -105,12 +149,42 @@
 <script src="../js/jquery/jquery-2.2.3.min.js"></script>
 <script>
     //一般直接写在一个js文件中
+    var layer,form,element,table;
+
     layui.use(['layer', 'form','element','table'], function(){
-        var layer = layui.layer
-            ,form = layui.form;
-        var element = layui.element;
-        var table = layui.table;
+         layer = layui.layer;
+         form = layui.form;
+         element = layui.element;
+         table = layui.table;
+
+        //表单监听
+        form.on('submit(formDemo)', function(data){
+            var param = data.field;
+            var newParas = $.extend({},param,{articleId:getQueryString("article")});
+
+            $.ajax({
+                url: "/fuligou/comment/add",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(newParas),
+                success: function (resp) {
+                    if (resp.respCode == "0000") {
+                    }else{
+                        layer.msg(resp.respMsg);
+                    }
+                },
+                error:function(){
+                    layer.msg("系统忙，请稍后重试！");
+                }
+            });
+
+            debugger;
+
+            return false;
+        });
+
     });
+
 
 </script>
 <script src="../js/fuligou/article.js"></script>
